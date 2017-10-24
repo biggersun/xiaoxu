@@ -1,0 +1,14 @@
+{
+    "apps": [{
+        "name": "helloWorld",
+        "script": "src/app.js",
+        "env": {
+            "NODE_ENV": "production",
+            "DEBUG_COLORS": true,
+            "SERVER_PORT": 8903
+        },
+        "exec_mode": "cluster",
+        "instances": 0
+    }]
+}
+
