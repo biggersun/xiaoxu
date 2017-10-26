@@ -1,7 +1,7 @@
 {
     "apps": [{
         "name": "helloWorld",
-        "script": "src/server/app.js",
+        "script": "bin/www",
         "env": {
             "NODE_ENV": "production",
             "DEBUG_COLORS": true,
