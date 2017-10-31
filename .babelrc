@@ -1,0 +1,16 @@
+{
+    "env": {
+      "browser": {
+        "presets": [["env", { modules: false }]],
+        "plugins": [
+          "transform-object-rest-spread"
+        ]
+      },
+      "node": {
+        "plugins": [
+          "transform-es2015-modules-commonjs",
+          "transform-object-rest-spread"
+        ]
+      }
+    }
+}
