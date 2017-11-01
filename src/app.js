@@ -7,6 +7,9 @@ import bodyParser from 'body-parser';
 import session from 'express-session';
 import flash from 'connect-flash';
 import connectMongo from 'connect-mongo';
+import nunjucks from 'nunjucks';
+
+import { isDev } from '../config/env';
 
 import routes from './routes/index';
 import settings from './settings';
@@ -16,7 +19,12 @@ const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+
+// nunjucks.configure('views', {
+//     noCache: isDev,
+//     express: app,
+// });
+// app.set('view engine', 'nunjucks');
 
 // flash
 app.use(flash());
