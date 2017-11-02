@@ -5,6 +5,8 @@ import settings from '../settings';
 
 const MongoStore = connectMongo(session);
 
+mongoose.Promise = global.Promise;
+
 const mongoUrl = `mongodb://${settings.host}/${settings.db}`;
 global.db = mongoose.createConnection(mongoUrl);
 

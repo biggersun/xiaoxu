@@ -26,17 +26,23 @@ async function reg(req, res, next) {
         msg = '只能输入6-20个字母、数字、下划线';
     }
 
-    await userModel.find({ username }).exec((err, user) => {
-        if (user.length !== 0) {
-            // req.flash('error', '用户名已被占用!');
-            errno = 1;
-            msg = '用户名已被占用!';
-        }
-    });
+    let userNameFromDb;
+    try {
+        userNameFromDb = await userModel.find({ username });
+    } catch (error) {
+        next(error);
+    }
+
+    if (userNameFromDb.length !== 0) {
+        // req.flash('error', '用户名已被占用!');
+        errno = 1;
+        msg = '用户名已被占用!';
+    }
 
     if (errno === 0) {
         await userModel.create({ username, password }, (err) => {
-            if (err) next();
+            if (err) next(err);
+            req.session.username = username;
         });
     }
     res.json({
