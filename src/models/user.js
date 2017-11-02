@@ -1,77 +1,12 @@
-const mongodb = require('./db');
+import mongoose from 'mongoose';
 
-function User(user) {
-    this.name = user.name;
-    this.password = user.password;
-    this.email = user.email;
-}
+const { Schema } = mongoose;
 
-module.exports = User;
+const UserSchema = new Schema({
+    username: String,
+    password: String,
+    email: String,
+    createTime: String,
+});
 
-// 存储用户信息
-User.prototype.save = function save(callback) {
-    // 要存入数据库的用户文档
-    const user = {
-        name: this.name,
-        password: this.password,
-        email: this.email,
-    };
-    // 打开数据库
-    mongodb.open((err, db) => {
-        if (err) {
-            return callback(err);// 错误，返回 err 信息
-        }
-        // 读取 users 集合
-        db.collection('users', (err, collection) => {
-            if (err) {
-                mongodb.close();
-                return callback(err);// 错误，返回 err 信息
-            }
-            // 将用户数据插入 users 集合
-            collection.insert(user, {
-                safe: true,
-            }, (err, user) => {
-                mongodb.close();
-                if (err) {
-                    return callback(err);// 错误，返回 err 信息
-                }
-                callback(null, user[0]);// 成功！err 为 null，并返回存储后的用户文档
-                return undefined;
-            });
-            return undefined;
-        });
-
-        return undefined;
-    });
-};
-
-// 读取用户信息
-User.get = function get(name, callback) {
-    // 打开数据库
-    mongodb.open((err, db) => {
-        if (err) {
-            return callback(err);// 错误，返回 err 信息
-        }
-        // 读取 users 集合
-        db.collection('users', (err, collection) => {
-            if (err) {
-                mongodb.close();
-                return callback(err);// 错误，返回 err 信息
-            }
-            // 查找用户名（name键）值为 name 一个文档
-            collection.findOne({
-                name,
-            }, (err, user) => {
-                mongodb.close();
-                if (err) {
-                    return callback(err);// 失败！返回 err 信息
-                }
-                callback(null, user);// 成功！返回查询的用户信息
-                return undefined;
-            });
-
-            return undefined;
-        });
-        return undefined;
-    });
-};
+export default db.model('User', UserSchema);

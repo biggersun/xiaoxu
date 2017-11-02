@@ -8,28 +8,28 @@ import {
 } from '../lib/routes';
 import render from '../lib/server/renderPage';
 
+import reg from './reg';
+import login from './login';
 
 export default function (app) {
-    console.log(PAGE_USER_LOGIN);
-    app.get('/', (req, res) => {
-        res.render('index', { title: 'Express' });
-    });
+    // app.get('/', (req, res) => {
+    //     render('index', { title: '首页' })(res);
+    // });
     app.get(PAGE_USER_REG, (req, res) => {
-        res.render('reg', { title: '注册' });
-    });
-    app.post(USER_REG, (req, res) => {
+        render('reg', { title: '注册' })(res);
     });
     app.get(PAGE_USER_LOGIN, (req, res) => {
-        render('login', { title: '登录' });
+        render('login', { title: '登录' })(res);
     });
-    app.post(USER_LOGIN, (req, res) => {
-    });
-    app.get('/post', (req, res) => {
-        res.render('post', { title: '发表' });
-    });
-    app.post('/post', (req, res) => {
-    });
-    app.get('/logout', (req, res) => {
-    });
+    app.post(USER_REG, reg);
+    app.post(USER_LOGIN, login);
+    // app.post('/post', (req, res) => {
+    // });
+    // app.get('/post', (req, res) => {
+    //     render('post', { title: '发表' })(res);
+    // });
+    // app.get('/logout', (req, res) => {
+    //     render('logout', { title: '发表' })(res);
+    // });
 }
 

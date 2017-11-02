@@ -14,9 +14,8 @@ const eslintrc = {
     plugins: [],
     globals: {
         $: true,
+        db: true,
         store: true,
-        wx: true,
-        WeixinJSBridge: true,
     },
     rules: {
         indent: ['error', 4],

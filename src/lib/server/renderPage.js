@@ -6,6 +6,8 @@ nunjucks.configure(projectDir, {
 });
 
 export default function render(page, data) {
-    return nunjucks.render(`views/${page}/index.njk`, data);
+    return (res) => {
+        res.send(nunjucks.render(`views/${page}/index.njk`, data));
+    };
 }
 
