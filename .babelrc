@@ -1,10 +1,27 @@
 {
     "env": {
-      "browser": {
-        "presets": [["env", { modules: false }]],
+      "development": {
+        "presets": ["react"],
         "plugins": [
-          "transform-object-rest-spread"
+            "transform-class-properties",
+            "transform-es2015-classes",
+            "transform-object-rest-spread"
         ]
+      },
+      "development.hot": {
+          "presets": ["react"],
+          "plugins": [
+              "transform-class-properties",
+              "transform-es2015-classes",
+              "transform-object-rest-spread",
+              "react-hot-loader/babel"
+          ]
+      },
+      "production": {
+          "presets": ["react", ["env", { "modules": false }]],
+          "plugins": [
+              "transform-object-rest-spread"
+          ]
       },
       "node": {
         "plugins": [
