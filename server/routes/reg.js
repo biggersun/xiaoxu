@@ -1,5 +1,5 @@
 import userModel from '../models/user';
-import { regNumberAndWord, regPassword, MD5 } from '../lib/util';
+import { regUserName, regPassword, MD5, sendData } from '../lib/util';
 
 async function reg(req, res, next) {
     const {
@@ -16,7 +16,7 @@ async function reg(req, res, next) {
 
     let msg = '注册成功';
 
-    if (!regNumberAndWord.test(username) || !username) {
+    if (!regUserName.test(username) || !username) {
         errno = 2;
         msg = '用户名不能为空，或含有特殊字符';
     }
@@ -48,7 +48,8 @@ async function reg(req, res, next) {
             req.session.username = username;
         });
     }
-    res.json({
+
+    sendData(res, 'json', {
         errno,
         msg,
     });

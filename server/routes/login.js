@@ -1,33 +1,43 @@
-import { MD5, sourceData } from '../lib/util';
+import { MD5, sendData } from '../lib/util';
 import userModel from '../models/user';
 
 export default async function (req, res, next) {
+    console.log('login', req.body);
     const {
         username,
         password,
-    } = req.query;
+    } = req.body;
 
+    console.log('errnoHasd', {
+        username,
+        password,
+    });
     let user;
+    let errno;
+    let msg;
+
     try {
         user = await userModel.find({ username });
     } catch (error) {
         next(error);
     }
 
-    if (!user) {
-        sourceData.errno = 1;
-        sourceData.msg = '用户名不存在!';
+    if (user.length === 0) {
+        errno = 1;
+        msg = '用户名不存在!';
     }
 
-    if (user[0].password !== MD5(password)) {
-        sourceData.errno = 2;
-        sourceData.msg = '密码错误!';
+    if (user && user.length > 0 && user[0].password !== MD5(password)) {
+        errno = 2;
+        msg = '密码错误!';
     }
 
-    if (sourceData.errno === 0) {
+    if (errno === 0) {
         req.session.user = user;
-        res.redirect('/');
     }
 
-    res.json(sourceData);
+    sendData(res, 'json', {
+        errno,
+        msg,
+    });
 }

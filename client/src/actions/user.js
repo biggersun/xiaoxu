@@ -1,5 +1,5 @@
 import { ACCOUNT_LOGOUT, ACCOUNT_LOGIN } from 'constants/api';
-import { LOGIN_URL, PERMISSION } from 'constants/basic';
+import { LOGIN_URL } from 'constants/basic';
 import { get, post } from 'assets/js/request';
 
 export function logout() {

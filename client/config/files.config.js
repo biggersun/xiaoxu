@@ -9,7 +9,6 @@ const appJsPath = resolve(mainDir, 'index.jsx');
 const loginJsPath = resolve(loginDir, 'index.jsx');
 const appHtmlPath = resolve(mainDir, 'index.html');
 
-console.log('projectDir', projectDir);
 const resolveModules = [srcDir, 'node_modules'];
 
 module.exports = {

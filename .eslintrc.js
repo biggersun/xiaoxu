@@ -35,7 +35,7 @@ const eslintrc = {
         'react/prefer-stateless-function': ['error', { ignorePureComponents: true }],
         'react/jsx-indent-props': ['error', 4],
         'react/forbid-prop-types': ['error', { forbid: ['any'] }],
-        'react/default-props-match-prop-types': 'off',
+        'react/default-props-match-prop-types': 'off'
     },
     settings: {
         'import/resolver': {

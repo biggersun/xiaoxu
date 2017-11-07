@@ -9,7 +9,7 @@ module.exports = (ctx) => {
     const isLess = /^\.less$/i.test(ctx.file.extname);
 
     const autoprefixerPlugin = autoprefixer({
-        browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 10']
+        browsers: ['last 2 versions', 'Firefox ESR', '> 1%', 'ie >= 10'],
     });
 
     const config = {};

@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import createHistory from 'history/createBrowserHistory';
 import { LOGIN_URL } from 'constants/basic';
 import RouteTree from './router';
@@ -50,6 +51,10 @@ export default class App extends PureComponent {
             return <div>loading</div>;
         }
 
-        return <RouteTree store={store} history={history} />;
+        return (
+            <MuiThemeProvider>
+                <RouteTree store={store} history={history} />
+            </MuiThemeProvider>
+        );
     }
 }
