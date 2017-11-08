@@ -1,7 +1,10 @@
-// import Loading from 'components/Loading';
+import Loading from 'components/Loading';
+import Toast from 'components/Toast';
 import { LOGIN_URL } from 'constants/basic';
 import * as http from './http';
-// const loading = Loading.newInstance();
+
+const loading = Loading.newInstance();
+const toast = Toast.newInstance();
 
 async function request(method, url, params, opt = {}, httpOpt) {
     const {
@@ -11,7 +14,7 @@ async function request(method, url, params, opt = {}, httpOpt) {
     } = opt;
 
     if (needLoading) {
-        // loading.add();
+        loading.add();
     }
 
     let res;
@@ -24,16 +27,16 @@ async function request(method, url, params, opt = {}, httpOpt) {
         }
 
         if (showErrorMsg) {
-            const msg = {
-                message: '提示信息',
-                description: e.errno === 4 ? e.data.msg : e.msg,
-            };
+            toast.show(e.errno === 4 ? e.data.msg : e.msg);
         }
 
         throw e;
     } finally {
         if (needLoading) {
-            // loading.remove();
+            loading.remove();
+        }
+        if (showErrorMsg) {
+            // toast.destory();
         }
     }
 

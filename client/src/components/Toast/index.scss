@@ -1,10 +1,10 @@
-.loading-component{
+.toast-component{
     width: 100%;
     display: none;
     justify-content: center;
     align-items: center;
     position: fixed;
-    top: 20px;
+    top: 10px;
 
     &.show{
         display: flex;

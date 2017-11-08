@@ -20,8 +20,8 @@ export function login(params) {
         ACCOUNT_LOGIN,
         params,
         {
-            showErrorMsg: false,
-            needLoading: false,
+            // showErrorMsg: false,
+            // needLoading: false,
         },
     );
 }

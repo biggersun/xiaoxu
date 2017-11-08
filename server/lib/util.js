@@ -9,7 +9,7 @@ export const regInteger = /^[0-9]*$/;
 export const regNumberAndWord = /^[0-9a-zA-Z]+$/;
 export const regNumberFix = /(\.00)$/;
 export const regPassword = /^(\w){6,20}$/;
-export const regUserName = /^(\w){1,20}$/;
+export const regUserName = /^[^!@#$%^&*]*$/;
 
 // data 每个接口返回的源数据
 export function sendData(res, func, data) {

@@ -1,76 +1,76 @@
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import classNames from 'classnames';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import RefreshIndicator from 'material-ui/RefreshIndicator';
+import Paper from 'material-ui/Paper';
 
 import './index.scss';
 
 const style = {
-    refresh: {
-        display: 'inline-block',
-        position: 'relative',
-    },
+    height: 40,
+    margin: 20,
+    paddingLeft: 20,
+    paddingRight: 20,
+    lineHeight: '40px',
+    textAlign: 'center',
+    backgroundColor: '',
+    display: 'inline-block',
 };
 
-class Loading extends PureComponent {
+class Toast extends Component {
     constructor(props) {
         super(props);
 
         this.state = {
             requestNum: 0,
+            msg: '',
         };
+        this.remove = this.remove.bind(this);
     }
 
-    add() {
+    show(msg, timeout = 1500) {
         this.setState({
             requestNum: this.state.requestNum + 1,
+            msg,
+        }, () => {
+            setTimeout(this.remove, timeout);
         });
     }
 
     remove() {
         const num = this.state.requestNum;
-
         this.setState({
             requestNum: num - 1 < 0 ? 0 : num - 1,
         });
     }
 
     render() {
-        const { requestNum } = this.state;
-
+        const { requestNum, msg } = this.state;
+        console.log(msg);
         return (
             <section
-                className={classNames('loading-component', { show: requestNum > 0 })}
+                className={classNames('toast-component', { show: requestNum > 0 })}
             >
                 <MuiThemeProvider>
-                    <RefreshIndicator
-                        size={40}
-                        left={10}
-                        top={0}
-                        status="loading"
-                        style={style.refresh}
-                    />
+                    <Paper style={style} zDepth={1}>
+                        {msg}
+                    </Paper>
                 </MuiThemeProvider>
             </section>
         );
     }
 }
 
-Loading.newInstance = function newLoadingInstance() {
+Toast.newInstance = function newToastInstance() {
     const div = document.createElement('div');
     document.body.appendChild(div);
     /* eslint-disable react/no-render-return-value */
-    const loading = ReactDOM.render(<Loading />, div);
+    const toast = ReactDOM.render(<Toast />, div);
     /* eslint-enable react/no-render-return-value */
 
     return {
-        add() {
-            loading.add();
-        },
-
-        remove() {
-            loading.remove();
+        show(msg, timeout) {
+            toast.show(msg, timeout);
         },
 
         destory() {
@@ -80,4 +80,4 @@ Loading.newInstance = function newLoadingInstance() {
     };
 };
 
-export default Loading;
+export default Toast;
