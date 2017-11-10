@@ -2,19 +2,14 @@ import { MD5, sendData } from '../lib/util';
 import userModel from '../models/user';
 
 export default async function (req, res, next) {
-    console.log('login', req.body);
     const {
         username,
         password,
     } = req.body;
 
-    console.log('errnoHasd', {
-        username,
-        password,
-    });
     let user;
-    let errno;
-    let msg;
+    let errno = 0;
+    let msg = '';
 
     try {
         user = await userModel.find({ username });

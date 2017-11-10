@@ -13,7 +13,7 @@ const style = {
     paddingRight: 20,
     lineHeight: '40px',
     textAlign: 'center',
-    backgroundColor: '',
+    backgroundColor: '#EEE',
     display: 'inline-block',
 };
 
@@ -46,7 +46,7 @@ class Toast extends Component {
 
     render() {
         const { requestNum, msg } = this.state;
-        console.log(msg);
+
         return (
             <section
                 className={classNames('toast-component', { show: requestNum > 0 })}

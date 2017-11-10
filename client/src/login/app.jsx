@@ -3,7 +3,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import { regUserName, regPassword } from 'assets/js/util';
-import { login } from 'actions/user';
+import { login, reg } from 'actions/user';
+import { APP_URL } from 'constants/basic';
 
 import './index.scss';
 
@@ -25,7 +26,7 @@ class Login extends PureComponent {
                     name: '密码',
                     value: '',
                     msg: '',
-                    msgErr: '请输入密码！',
+                    msgErr: '请输入正确的密码！',
                     reg: regPassword,
                 },
             ],
@@ -39,7 +40,8 @@ class Login extends PureComponent {
         const { inputList } = this.state;
 
         const newInputList = inputList.map((item) => {
-            let newValue = '';
+            let newValue = item.value;
+
             if (item.type === type) {
                 newValue = value;
             }
@@ -54,11 +56,11 @@ class Login extends PureComponent {
         });
     }
 
-    async handleSubmint() {
+    async handleSubmint(type) {
         const { inputList } = this.state;
 
         let errno = 0;
-        let params = {};
+        const params = {};
         const newInputList = inputList.map((item) => {
             let msg = '';
             if (!item.reg.test(item.value)) {
@@ -76,16 +78,23 @@ class Login extends PureComponent {
             inputList: newInputList,
         });
 
-        console.log(params);
         if (errno === 0) {
-            await login(params);
+            try {
+                if (type === 1) {
+                    await login(params);
+                } else {
+                    await reg(params);
+                }
+            } catch (error) {
+                // no-catch
+                return;
+            }
+            location.href = APP_URL;
         }
     }
 
     render() {
         const {
-            msg1,
-            msg2,
             inputList,
         } = this.state;
 
@@ -96,9 +105,11 @@ class Login extends PureComponent {
                         const { name, type, msg } = item;
                         return (
                             <TextField
+                                key={type}
                                 hintText={`请输入${name}`}
                                 errorText={msg}
                                 floatingLabelText={name}
+                                type={type}
                                 onChange={(e) => { this.handleInput(e, type); }}
                             />
                         );
@@ -108,9 +119,13 @@ class Login extends PureComponent {
                         <RaisedButton
                             label="登录"
                             primary
-                            onClick={this.handleSubmint}
+                            onClick={() => this.handleSubmint(1)}
                         />
-                        <RaisedButton label="注册" primary />
+                        <RaisedButton
+                            label="注册"
+                            primary
+                            onClick={() => this.handleSubmint(2)}
+                        />
                     </div>
                 </section>
             </MuiThemeProvider>

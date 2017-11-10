@@ -1,4 +1,8 @@
-import { ACCOUNT_LOGOUT, ACCOUNT_LOGIN } from 'constants/api';
+import {
+    ACCOUNT_LOGOUT,
+    ACCOUNT_LOGIN,
+    ACCOUNT_REG,
+} from 'constants/api';
 import { LOGIN_URL } from 'constants/basic';
 import { get, post } from 'assets/js/request';
 
@@ -20,8 +24,18 @@ export function login(params) {
         ACCOUNT_LOGIN,
         params,
         {
-            // showErrorMsg: false,
-            // needLoading: false,
+            needLoading: false,
+        },
+    );
+}
+
+// 登陆页面使用
+export function reg(params) {
+    return post(
+        ACCOUNT_REG,
+        params,
+        {
+            needLoading: false,
         },
     );
 }

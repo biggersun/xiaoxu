@@ -1,6 +1,8 @@
+import { USER_INFO } from 'constants/api';
+
 export default async function initializeState() {
     const user = {
-        name: 'sun',
+        aircleList: 'sun',
     };
-    return { user };
+    return {};
 }

@@ -5,7 +5,7 @@ async function reg(req, res, next) {
     const {
         username,
         password,
-    } = req.query;
+    } = req.body;
 
     let errno = 0;
     /**
