@@ -5,6 +5,7 @@ import favicon from 'serve-favicon';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 import flash from 'connect-flash';
+
 import sessionApp from './models/db';
 import routes from './routes/index';
 

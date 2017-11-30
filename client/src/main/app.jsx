@@ -53,7 +53,7 @@ export default class App extends PureComponent {
 
         return (
             <MuiThemeProvider>
-                <RouteTree store={store} history={history} indexPath="/" />
+                <RouteTree store={store} history={history} indexPath="/aircle-list" />
             </MuiThemeProvider>
         );
     }

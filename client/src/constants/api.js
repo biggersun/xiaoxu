@@ -6,4 +6,5 @@ export const ACCOUNT_LOGOUT = `${prefix}/login-out`;
 export const ACCOUNT_REG = `${prefix}/reg`;
 
 export const AIRCLE_LIST = `${prefix}/aircle-list`;
+export const COMMON_UPLOAD = `${prefix}/common-upload`;
 

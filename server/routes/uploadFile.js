@@ -1,9 +1,9 @@
 import { sendData } from '../lib/util';
 
 export default async function (req, res, next) {
-    const {
-        title,
-    } = req.body;
+    // const {} = req.body;
+
+    console.log(req);
 
     const url = 'asdsdss';
 

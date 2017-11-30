@@ -52,12 +52,12 @@ SnackbarSelf.newInstance = function newSnackbarSelfInstance() {
     const div = document.createElement('div');
     document.body.appendChild(div);
     /* eslint-disable react/no-render-return-value */
-    const SnackbarSelf = ReactDOM.render(<SnackbarSelf />, div);
+    const snackbar = ReactDOM.render(<SnackbarSelf />, div);
     /* eslint-enable react/no-render-return-value */
 
     return {
         show(msg, timeout) {
-            SnackbarSelf.show(msg, timeout);
+            snackbar.show(msg, timeout);
         },
 
         destory() {
