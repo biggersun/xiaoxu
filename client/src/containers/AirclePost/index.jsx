@@ -71,7 +71,7 @@ class AirclePost extends PureComponent {
         const { uploadMarkdown } = this.props;
         console.log(e.target.files);
         try {
-            await uploadMarkdown({ file: e.target.files[0] });
+            await uploadMarkdown({ markdown: e.target.files[0] });
         } catch (error) {
             // no-catch
         }
@@ -130,7 +130,7 @@ class AirclePost extends PureComponent {
                     />
                     <br />
                 </div>
-                <input type="file" accept="asdas" onChange={this.handleFile} />
+                <input type="file" name="markdown" accept="" onChange={this.handleFile} />
                 <Chip chipData={tabs} onChange={this.handleChip} />
                 <RaisedButton label="提交" primary style={style} />
             </Paper>
