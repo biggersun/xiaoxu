@@ -1,7 +1,7 @@
 {
     "apps": [{
         "name": "helloWorld",
-        "script": "bin/www",
+        "script": "dist/bin/server",
         "env": {
             "NODE_ENV": "production",
             "DEBUG_COLORS": true,

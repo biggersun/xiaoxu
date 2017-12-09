@@ -4,6 +4,8 @@ const environment = process.env.NODE_ENV || 'development';
 const isDev = environment === 'development';
 
 const srcDir = process.cwd();
+const clientDir = resolve(srcDir, 'client');
+const clientSrcDir = resolve(clientDir, 'src');
 const distDir = resolve(srcDir, 'dist');
 const projectDir = isDev ? srcDir : distDir;
 
@@ -18,6 +20,11 @@ module.exports = {
 
     // 源码目录
     srcDir,
+
+    // 客户端源码
+    clientDir,
+    // 客户端src
+    clientSrcDir,
 
     // 编译源码目录
     distDir,

@@ -1,8 +1,6 @@
 const { resolve } = require('path');
+const { clientSrcDir: srcDir, staticDir: distDir } = require('../../config/env.js');
 
-const projectDir = resolve(process.cwd(), 'client');
-const srcDir = resolve(projectDir, 'src');
-const distDir = resolve(projectDir, 'dist');
 const mainDir = resolve(srcDir, 'main');
 const loginDir = resolve(srcDir, 'login');
 const appJsPath = resolve(mainDir, 'index.jsx');
@@ -12,8 +10,6 @@ const appHtmlPath = resolve(mainDir, 'index.html');
 const resolveModules = [srcDir, 'node_modules'];
 
 module.exports = {
-    projectDir,
-    srcDir,
     distDir,
     mainDir,
     appJsPath,

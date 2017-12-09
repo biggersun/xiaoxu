@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const { srcDir, distDir, appHtmlPath } = require('./files.config');
+const { appHtmlPath } = require('./files.config');
+const { publicPath, staticDir, clientSrcDir } = require('../../config/env');
 
 module.exports = () => {
     const NODE_ENV = process.env.NODE_ENV === 'production' ? 'production' : 'development';
@@ -38,7 +39,7 @@ module.exports = () => {
     const fixMomentImport = new webpack.ContextReplacementPlugin(/moment[/\\]locale$/, /zh-cn/);
 
     return {
-        context: srcDir,
+        context: clientSrcDir,
 
         stats: {
             chunks: false,
@@ -46,7 +47,8 @@ module.exports = () => {
         },
 
         output: {
-            path: distDir,
+            path: staticDir,
+            publicPath,
         },
 
         module: {
@@ -97,7 +99,7 @@ module.exports = () => {
         ],
 
         resolve: {
-            modules: [srcDir, 'node_modules'],
+            modules: [clientSrcDir, 'node_modules'],
             extensions: ['*', '.js', '.jsx', '.css', '.scss'],
         },
     };
